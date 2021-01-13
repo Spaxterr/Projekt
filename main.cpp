@@ -28,21 +28,18 @@ int main()
                     initRemoveContact();
                     cout << "Klicka ENTER för att återvända till start-menyn.\n";
                     getchar();
-                    cin.get();
                     validInput = true;
                     break;
                 case '3':
                     printAllContacts(getContactMap());
                     cout << "Klicka ENTER för att återvända till start-menyn.\n";
                     getchar();
-                    cin.get();
                     validInput = true;
                     break;
                 case '4':
                     initSearchContact();
                     cout << "Klicka ENTER för att återvända till start-menyn.\n";
                     getchar();
-                    cin.get();
                     validInput = true;
                     break;
                 case '5':

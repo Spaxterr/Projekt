@@ -11,7 +11,7 @@ void saveContact(Contact contact)
 {
     ofstream myFile;
     myFile.open("contacts.txt", ofstream::out | ofstream::app);
-    myFile << "Name:" << contact.name << "|Address:" << contact.address << "|PhoneNr:" << contact.phonenr << "|Birthday:" << contact.birthday << "|etc:" << contact.etc << "|" << endl;
+    myFile << "Name:" << contact.name << "|Email:" << contact.email + "|Address:" << contact.address << "|PhoneNr:" << contact.phonenr << "|Birthday:" << contact.birthday << "|etc:" << contact.etc << "|" << endl;
     myFile.close();
 }
 

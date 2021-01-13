@@ -18,6 +18,8 @@ void initCreateContact()    // Metod för att påbörja skapelesen av en kontakt
     std::cout << "Ange namn: ";
     getchar();
     getline(std::cin, con.name);
+    std::cout << "Ange E-mail address: ";
+    getline(std::cin, con.email);
     std::cout << "\nAnge address: ";
     getline(std::cin, con.address);
     std::cout << "\nAnge telefonnummer: ";
@@ -31,26 +33,57 @@ void initCreateContact()    // Metod för att påbörja skapelesen av en kontakt
     std::cout << "Kontakt sparad!\n";
 }
 
+
+std::string toLowerCase(std::string str)
+{
+    std::string newStr = "";
+    newStr.reserve(str.size());
+    for (int i = 0; i < str.size(); i++)
+    {
+        char c = str[i];
+        c = tolower(c);
+        newStr += c;
+    }
+    return newStr;
+}
+
+
+void removeSpecialChars(std::string& line)
+{
+    for (int i = 0; i < line.size(); i++)
+    {
+        char c = line[i];
+        if ((int)'z' >= (int)c >= (int)'a')
+        {
+            line.erase(line.begin() + i);
+        }
+    }
+}
+
+
 void initSearchContact()    // Metod för att påbörja sökning av en kontakt
 {
     clearConsole();
     std::map<int, Contact> contactMap = getContactMap();
     std::string searchTerm;
+    removeSpecialChars(searchTerm);
     std::cout << "Var vänlig ange en sök-term: ";
     getchar();
     std::getline(std::cin, searchTerm);
     for(size_t i = 0; i < contactMap.size(); i++)
     {
         std::string contact = contactMap[i].getAsString();
-        if(contact.find(searchTerm) != std::string::npos)
+        contact = toLowerCase(contact);
+        if(contact.find(toLowerCase(searchTerm)) != std::string::npos)
         {
             Contact currContact = contactMap[i];
             std::cout << "--------------[" << (i+1) << "]--------------\n";
-            std::cout << "Namn: " << currContact.name << "\nAddress: " << currContact.address << "\nTelefon Nr: " << currContact.phonenr << "\nFödelsedatum: " << currContact.birthday << "\nÖvrigt: " << currContact.etc << "\n";
+            std::cout << "Namn: " << currContact.name << "\nE-mail: " << currContact.email << "\nAddress: " << currContact.address << "\nTelefon Nr: " << currContact.phonenr << "\nFödelsedatum: " << currContact.birthday << "\nÖvrigt: " << currContact.etc << "\n";
             std::cout << "-------------------------------\n";
         }
     }
 }
+
 
 void initRemoveContact()    // Metod för att påbörja borttagelse av en kontakt
 {
@@ -102,6 +135,8 @@ Contact loadContact(std::string input)  //Metod för att ladda en kontakt från 
         {
             if (key == "Name")
                 con.name = value;
+            else if (key == "Email")
+                con.email = value;
             else if (key == "Address")
                 con.address = value;
             else if (key == "PhoneNr")
@@ -118,6 +153,7 @@ Contact loadContact(std::string input)  //Metod för att ladda en kontakt från 
     return con;
 }
 
+
 void printAllContacts(std::map<int, Contact> contactMap)    // Metod för att skriva ut alla kontakter
 {
     clearConsole();
@@ -125,9 +161,10 @@ void printAllContacts(std::map<int, Contact> contactMap)    // Metod för att sk
     {
         Contact currContact = contactMap[i];
         std::cout << "--------------[" << (i+1) << "]--------------\n";
-        std::cout << "Namn: " << currContact.name << "\nAddress: " << currContact.address << "\nTelefon Nr: " << currContact.phonenr << "\nFödelsedatum: " << currContact.birthday << "\nÖvrigt: " << currContact.etc << "\n";
+        std::cout << "Namn: " << currContact.name << "\nE-mail: " << currContact.email << "\nAddress: " << currContact.address << "\nTelefon Nr: " << currContact.phonenr << "\nFödelsedatum: " << currContact.birthday << "\nÖvrigt: " << currContact.etc << "\n";
         std::cout << "-------------------------------\n";
     }
+    getchar();
 }
 
 

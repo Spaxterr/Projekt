@@ -6,11 +6,11 @@
 class Contact
 {
     public:
-        std::string name, address, phonenr, birthday, etc;
+        std::string name, email, address, phonenr, birthday, etc;
 
         std::string getAsString()
         {
-            return "Name:" + name + "|Address:" + address + "|PhoneNr:" + phonenr + "|Birthday:" + birthday + "|etc:" + etc + "|";
+            return "Name:" + name + "|Email:" + email + "|Address:" + address + "|PhoneNr:" + phonenr + "|Birthday:" + birthday + "|etc:" + etc + "|";
         }
 };
 Contact loadContact(std::string input);
